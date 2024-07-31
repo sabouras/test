@@ -39,7 +39,7 @@ char	*to_expand(char *str)
 	return (ft_substr(str, start, end - start));
 }
 
-int	iniesta(t_lexer **lexer, t_env *env, char **str_to_expand)
+int	modric(t_lexer **lexer, t_env *env, char **str_to_expand)
 {
 	int		i;
 	char	tmp[2];
@@ -85,7 +85,7 @@ void	expand(t_lexer *lexer, t_env *env)
 		}
 		else if (lexer->tokens == WORD && lexer->str[i] != '\'')
 		{
-			i = iniesta(&lexer, env, &str_to_expand);
+			i = modric(&lexer, env, &str_to_expand);
 			lexer->str = str_to_expand;
 		}
 		lexer = lexer->next;
