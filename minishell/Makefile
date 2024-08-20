@@ -24,10 +24,10 @@ LIBFT_SRC = ./libft/ft_atoi.c       ./libft/ft_bzero.c \
 			
 
 UTILS = parsing/utils/ft_lexer_new.c parsing/utils/ft_lstsize.c parsing/utils/ft_lstlast.c parsing/utils/ft_lstadd_back.c 	parsing/utils/ft_lstadd_front.c
-LIXER = parsing/src/lexer.c parsing/src/display_tokens.c parsing/src/syntax_error.c
-PARSRE = parsing/src/parser.c parsing/src/parser_loot_box.c
-EXPAND = parsing/src/env_linkedlist.c parsing/src/expand.c parsing/src/expand_loot_box.c
-FREE = ./gc/gc.c ./gc/error_exit.c
+LIXER = parsing/lexer.c parsing/display_tokens.c parsing/syntax_error.c
+PARSRE = parsing/parse.c parsing/parser_box.c
+EXPAND = parsing/env_linkedlist.c parsing/expand.c parsing/expand_box.c
+# FREE = ./gc/gc.c ./gc/error_exit.c
 
 SRC = main.c loop_minishell.c ${UTILS} ${FREE} ${LIBFT_SRC} ${LIXER} ${PARSRE} ${EXPAND}
 
@@ -40,7 +40,7 @@ OBG = ${SRC:.c=.o}
 all: ${NAME}
 
 ${NAME} : ${OBG}
-	@${CC} ${CFLAG} ${OBG} -lreadline -lhistory -o ${NAME}
+	@${CC} ${CFLAG} ${OBG} -lreadline  -o ${NAME}
 	@echo "💯"
 
 

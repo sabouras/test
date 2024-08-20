@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 
-#include "./../../minishell.h"
+#include "../minishell.h"
 
 // fun handle $"USER" ==> USER | if 1: echo $ | if 2:echo $ "a" != echo a
 int	quote_after_dollar(t_lexer **lexer, int *i, char **str_to_expand)

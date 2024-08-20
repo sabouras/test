@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_listlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmestini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+t_list	*ft_listlast(t_list *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -33,7 +33,7 @@ int main ()
     node1->next = node2;
     node2->next = node3;
 
-    t_list *lastnode = ft_lstlast(node1);
+    t_list *lastnode = ft_listlast(node1);
 
     if (lastnode)
     {

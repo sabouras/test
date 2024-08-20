@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_listadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmestini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_listadd_back(t_list **lst, t_list *new)
 {
 	t_list	*last;
 
@@ -37,8 +37,8 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 // int main ()
 // {
 // 		t_list *lst = ft_lstnew(ft_strdup("bahae"));
-// 	ft_lstadd_back(&lst, ft_lstnew(ft_strdup("mestini")));
-// 	ft_lstadd_back(&lst, ft_lstnew(ft_strdup("mok")));
+// 	ft_listadd_back(&lst, ft_lstnew(ft_strdup("mestini")));
+// 	ft_listadd_back(&lst, ft_lstnew(ft_strdup("mok")));
 // 	ft_lstadd_front(&lst, ft_lstnew(ft_strdup("kys")));
 // 	t_list *current = lst;
 // 	// while(current)

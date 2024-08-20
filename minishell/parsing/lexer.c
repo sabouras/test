@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 
-#include "./../../minishell.h"
+#include "../minishell.h"
 
 void	add_node(t_lexer **head, t_tokens type, char *str)
 {

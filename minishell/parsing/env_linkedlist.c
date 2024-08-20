@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 
-#include "./../../minishell.h"
+#include "../minishell.h"
 
 static int	search_in(char *str, char c)
 {

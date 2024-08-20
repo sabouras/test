@@ -29,7 +29,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 			free(newc);
 			return (NULL);
 		}
-		ft_lstadd_back(&newl, elem);
+		ft_listadd_back(&newl, elem);
 		lst = lst->next;
 	}
 	return (newl);
@@ -52,10 +52,10 @@ int	main(void)
 {
 	// Create a linked list with some strings
 	t_list *lst = ft_lstnew("Hello");
-	ft_lstadd_back(&lst, ft_lstnew("world"));
-	ft_lstadd_back(&lst, ft_lstnew("from"));
-	ft_lstadd_back(&lst, ft_lstnew("Linked"));
-	ft_lstadd_back(&lst, ft_lstnew("List"));
+	ft_listadd_back(&lst, ft_lstnew("world"));
+	ft_listadd_back(&lst, ft_lstnew("from"));
+	ft_listadd_back(&lst, ft_lstnew("Linked"));
+	ft_listadd_back(&lst, ft_lstnew("List"));
 
 	// Apply ft_lstmap to duplicate the strings
 	t_list *duplicated_lst = ft_lstmap(lst, duplicate_content, delete_content);

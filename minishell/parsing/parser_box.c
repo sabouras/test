@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 
-#include "./../../minishell.h"
+#include "../minishell.h"
 
 void	add_node_command(t_command **head, t_file **file_head, char *command)
 {

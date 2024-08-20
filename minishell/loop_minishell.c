@@ -17,7 +17,7 @@ void nongnu(int i)
     if (i == SIGINT)
     {
         write(0,"\n", 1 );
-        rl_replace_line("", 0);
+        // rl_replace_line("", 0);
         rl_on_new_line();
         rl_redisplay();
     }
@@ -93,11 +93,11 @@ void	loop_minishell(t_tool *data, t_env *env)
 			display_token_command(command_list);
 			free(data->cmd);
 		}
-		else if (!data->cmd)
-		{
-			_free();
-			// ba9i leak
-			break ;
-		}
+		// else if (!data->cmd)
+		// {
+		// 	_free();
+		// 	// ba9i leak
+		// 	break ;
+		// }
 	}
 }

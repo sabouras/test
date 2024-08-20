@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 
-#include "./../../minishell.h"
+#include "../minishell.h"
 
 char	*remove_quotes(char *arg)
 {

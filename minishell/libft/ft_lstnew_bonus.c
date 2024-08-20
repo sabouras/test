@@ -32,8 +32,8 @@ t_list	*ft_lstnew(void *content)
 // int main ()
 // {
 // 	t_list *node = ft_lstnew("bahae");
-// 	ft_lstadd_back(&node, ft_lstnew("mestini"));
-// 	ft_lstadd_back(&node , ft_lstnew("ok"));
+// 	ft_listadd_back(&node, ft_lstnew("mestini"));
+// 	ft_listadd_back(&node , ft_lstnew("ok"));
 
 // 	t_list *current = node;
 // 	while(current)

@@ -15,8 +15,8 @@
 # define MINISHELL_H
 
 # include "./libft/libft.h"
-# include "./gc/gc.h"
-# include <readline/history.h>
+// # include "./garbage_collector/gc.h"
+// # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdbool.h>
 # include <stdio.h>
@@ -30,11 +30,11 @@
 // #define HEREDOC 5
 // #define APPEND 6
 
-typedef struct s_list
-{
-	char				*content;
-	struct s_list		*next;
-}						t_list;
+// typedef struct s_list
+// {
+// 	char				*content;
+// 	struct s_list		*next;
+// }						t_list;
 
 typedef enum e_num
 {
@@ -136,5 +136,7 @@ void					dont_expand(t_lexer **lexer);
 char					*to_expand(char *str);
 char					*get_env_value(t_env *env, char *key);
 ///////////////////////////////free///////////////////////
+
+void	gc_push(void *address_to_save);
 
 #endif
