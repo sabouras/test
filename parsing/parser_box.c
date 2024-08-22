@@ -102,6 +102,8 @@ void	kroos(t_lexer **head, char **command, t_file **file)
 			while ((*head) && (*head)->tokens == WORD)
 			{
 				*command = ft_strjoin(*command, (*head)->str);
+				// printf("cmnd = %s\n", *command);
+				// printf("str = %s\n", (*head)->str);
 				if ((*head)->next && (*head)->next->tokens == WHITESPACE)
 					*command = ft_strjoin(*command, " ");
 				(*head) = (*head)->next;

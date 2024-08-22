@@ -59,6 +59,7 @@ t_command	*parser(t_lexer *data)
 	{
 		while (head && head->tokens != PIPE)
 			kroos(&head, &command, &file);
+		// printf("command = %s\n", command);
 		add_node_command(&command_list, &file, command);
 		command = NULL;
 		file = NULL;

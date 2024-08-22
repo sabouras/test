@@ -143,5 +143,6 @@ char					*get_env_value(t_env *env, char *key);
 
 void	gc_push(void *address_to_save);
 void	error_exit(int status, char *str);
+int	exec_command(t_command	*cmnd, t_env *envar);
 void	_free(void);
 #endif

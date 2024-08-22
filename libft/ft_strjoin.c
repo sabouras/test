@@ -11,13 +11,14 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <string.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	total;
 	char	*copy;
 
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)
 		return (ft_strdup(s2));
@@ -31,6 +32,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ft_strlcat(copy, s2, total);
 	return (copy);
 }
+
 /*
 int main ()
 {

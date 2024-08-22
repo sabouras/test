@@ -12,6 +12,118 @@
 
 
 #include "minishell.h"
+
+int	ft_perror(char *msg, char *utils, char *s)
+{
+	write(STDERR_FILENO, "minishell: ", 12);
+	write(STDERR_FILENO, msg, ft_strlen(msg));
+	if (utils)
+		write(STDERR_FILENO, utils, ft_strlen(utils));
+	if (s)
+		write(STDERR_FILENO, s, ft_strlen(s));
+	write(STDERR_FILENO, ".\n", 2);
+	return (EXIT_FAILURE);
+}
+
+
+
+void	execute_simple_command(t_command *cmnd, t_env *envar)
+{
+	int		pid;
+	int status = 0;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		if (cmnd->cmd)
+			exec_command(cmnd, envar);
+		exit (1);
+	}
+	else if (pid > 0)
+		waitpid(pid, &status, 0);
+	else
+		perror("fork");
+}
+
+void	exec_child(int *fd, t_command *smpl_cmd, t_env *envar)
+{
+	close(fd[0]);
+	dup2(fd[1], 1);
+	execute_simple_command(smpl_cmd, envar);
+	close(fd[1]);
+	exit(0);
+}
+
+void execute_piped_command(t_command *command, t_env *envar)
+{
+    int fd[2];
+    int status;
+    pid_t pid;
+    t_command *smpl_cmd = command;
+
+    while (smpl_cmd->next)
+    {
+        // Create a pipe for the current command
+        if (pipe(fd) == -1)
+        {
+            perror("pipe");
+            exit(1);
+        }
+
+        // Fork a new process
+        pid = fork();
+        if (pid == -1)
+        {
+            perror("fork");
+            exit(1);
+        }
+
+        if (pid == 0) // Child process
+        {
+            // Redirect stdout to the pipe's write end
+            if (dup2(fd[1], STDOUT_FILENO) == -1)
+            {
+                perror("dup2");
+                exit(1);
+            }
+            close(fd[1]); // Close the write end after duplication
+            close(fd[0]); // Close the read end in the child
+
+            // Execute the current command
+            execute_simple_command(smpl_cmd, envar);
+
+            // Exit after command execution
+            exit(1);
+        }
+        else // Parent process
+        {
+            // Close the write end in the parent
+            close(fd[1]);
+
+            // Redirect stdin to the pipe's read end for the next command
+            if (dup2(fd[0], STDIN_FILENO) == -1)
+            {
+                perror("dup2");
+                exit(1);
+            }
+            close(fd[0]); // Close the read end after duplication
+
+            // Wait for the child process to finish
+            waitpid(pid, &status, 0);
+        }
+
+        // Move to the next command in the pipeline
+        smpl_cmd = smpl_cmd->next;
+    }
+
+    // Execute the last command in the pipeline
+    execute_simple_command(smpl_cmd, envar);
+
+    // Restore stdin to default
+    dup2(STDIN_FILENO, STDIN_FILENO);
+}
+
+
 void nongnu(int i)
 {
     if (i == SIGINT)
@@ -62,16 +174,33 @@ void hayed_3liya(t_command **command)
 	}
 
 }
+
+int	ft_readline(char *line)
+{
+	line = readline("[minishell]~> ");
+	if (!line)
+	{
+		printf("exit\n");
+		exit(1);
+	}
+	if (ft_strcmp(line, "") == 0)
+		return (1);
+	if (ft_strlen(line) > 0)
+		add_history(line);
+	return (0);
+}
 void	loop_minishell(t_tool *data, t_env *env)
 {
 	t_command	*command_list;
+	(void)env;
 
 	signal(SIGINT, nongnu);
     signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		data->cmd = readline("minishell$ ");
-		if (ft_strlen(data->cmd) > 0)
+		printf("hhhhhhh\n");
+		if (data->cmd)
 		{
 			// if(!check_heredoc(data->cmd))
 				add_history(data->cmd);
@@ -90,14 +219,15 @@ void	loop_minishell(t_tool *data, t_env *env)
 				continue ;
 			}
 			hayed_3liya(&command_list);
-			display_token_command(command_list);
+			// display_token_command(command_list);
+			execute_piped_command(command_list, env);
 			free(data->cmd);
 		}
-		// else if (!data->cmd)
-		// {
-		// 	_free();
-		// 	// ba9i leak
-		// 	break ;
-		// }
+		else if (!data->cmd)
+		{
+			_free();
+			// ba9i leak
+			break ;
+		}
 	}
 }
